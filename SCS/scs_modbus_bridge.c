@@ -16,7 +16,8 @@ extern uint16_t MODBUS_Reg[];
 
 static inline uint8_t sid(void)
 {
-    uint16_t id = MODBUS_Reg[MB_SERVO_ID];
+    uint16_t id = MODBUS_Reg[MB_SERVO_ID];// 获取舵机的 ID（通过 MODBUS 寄存器中的 `MB_SERVO_ID`）
+
     if (id == 0) id = 1;          
     return (uint8_t)id;
 }
@@ -32,26 +33,36 @@ static loop_ctx_t s_loop;
 #define LOOP_TOL_DEG  3        // 到位容差
 
 // 复用 WritePos ：把角度发给舵机
-static void SCS_GoAngleDeg(uint16_t deg, uint16_t spd, uint16_t tim){
+static void SCS_GoAngleDeg(uint16_t deg, uint16_t spd, uint16_t tim){ //舵机的最大角度为 270°，与舵机的 1024 步数对应。
+	
+		uint8_t id = sid();  // 获取舵机的 ID（通过 MODBUS 寄存器中的 `MB_SERVO_ID`）
+
+    if (id == 0) id = 1;  // 如果没有设置 ID，默认使用 ID 1
+	
     if (deg > 360) deg = (uint16_t)((deg<<8)|(deg>>8));   // 防上位机发反
     if (deg > 270) deg = 270;
     // 兜底速度: speed=0 time=0 
-    if (spd == 0 && tim == 0) spd = 1500;
+    if (spd == 0 && tim == 0) spd = 1500; //若速度（spd）和时间（tim）为零，则设定一个默认的速度（1500）。速度和时间会传递到 WritePos 函数，控制舵机的运动。
 
     // 角度到步数： round(deg * 1024 / 270)
     uint32_t t = (uint32_t)deg * 1024u + 135u;
     uint16_t steps = (uint16_t)(t / 270u);
     if (steps > 1024) steps = 1024;
 
-    MODBUS_Reg[MB_DEBUG_LAST_STEPS] = steps;    //调试回写
+    MODBUS_Reg[MB_DEBUG_LAST_STEPS] = steps;    //调试回写 本质上决定了舵机运动多少步数！ 
     MODBUS_Reg[MB_DEBUG_FLAGS]     |= 0x01;
 
-    WritePos((uint8_t)MODBUS_Reg[MB_SERVO_ID], steps, tim, spd);
-    s_loop.tgt_deg = deg;
+   // WritePos((uint8_t)MODBUS_Reg[MB_SERVO_ID], steps, tim, spd); 
+    WritePos(id, steps, tim, spd);  
+	  s_loop.tgt_deg = deg;
+		    // 控制第二个舵机（ID 为 2）
+    if (id == 2) {
+        WritePos(2, steps, tim, spd);  // 使用 id 2 控制第二个舵机
+    }
 }
 
 
-static void SCS_LoopStartNow(void){
+static void SCS_LoopStartNow(void){ //该函数启动一个往返循环，即舵机从角度 A 移动到 B，之后再返回到 A，形成一个往返运动。
       // 取循环参数MB_GOAL_SPEED/TIME)
     uint16_t spd = MODBUS_Reg[MB_LOOP_SPEED] ? MODBUS_Reg[MB_LOOP_SPEED] : MODBUS_Reg[MB_GOAL_SPEED];
     uint16_t tim = MODBUS_Reg[MB_LOOP_TIME]  ? MODBUS_Reg[MB_LOOP_TIME]  : MODBUS_Reg[MB_GOAL_TIME];
@@ -78,7 +89,10 @@ static uint16_t angle_deg_to_steps(uint16_t angle_raw){
 
 // 执行一次 WritePos并记录信息
 static void SCS_ExecWritePos(void){
-    uint8_t  id    = sid();
+    uint8_t  id    = sid();// 获取舵机 ID
+    
+    if (id == 0) id = 1;  // 默认 ID 为 1
+	
     uint16_t time  = MODBUS_Reg[MB_GOAL_TIME];
     uint16_t speed = MODBUS_Reg[MB_GOAL_SPEED];
 
@@ -90,7 +104,12 @@ static void SCS_ExecWritePos(void){
     uint16_t steps = angle_deg_to_steps(MODBUS_Reg[MB_GOAL_POS]); // ?????(0..1024)
     MODBUS_Reg[MB_DEBUG_LAST_STEPS] = steps;
     MODBUS_Reg[MB_DEBUG_FLAGS]     |= 0x01;
-    WritePos(id, steps, time, speed);
+    if (id == 2) {
+        WritePos(id, steps, time, speed);  // 使用 id 2 控制第二个舵机
+    } else {
+        WritePos(id, steps, time, speed);  // 默认使用 id 1 控制第一个舵机
+    }
+		//WritePos(id, steps, time, speed);
 }
 
 
@@ -99,9 +118,13 @@ static void SCS_ExecWritePos(void){
 void SCS_Bridge_Init(void)
 	{
     setEnd(1);                      
-    if (MODBUS_Reg[MB_SERVO_ID] == 0) MODBUS_Reg[MB_SERVO_ID] = 1;
-    MODBUS_Reg[MB_TORQUE_ENABLE] = 1;
+//		MODBUS_Reg[MB_SERVO_ID] = 2;   // 设置舵机 1 （ID1）
+//    MODBUS_Reg[MB_SERVO_ID2] = 2;  // 设置舵机 2 （ID2）
+   if (MODBUS_Reg[MB_SERVO_ID] == 0) MODBUS_Reg[MB_SERVO_ID] = 1;
+    MODBUS_Reg[MB_TORQUE_ENABLE] = 1;//默认使能舵机 开始
+		MODBUS_Reg[MB_TORQUE_ENABLE2] = 1;
     EnableTorque((uint8_t)MODBUS_Reg[MB_SERVO_ID], 1);
+		EnableTorque((uint8_t)MODBUS_Reg[MB_SERVO_ID2], 1);
 	}
 
 
@@ -111,7 +134,7 @@ void SCS_Bridge_OnWrite(uint16_t startAddr, uint16_t len){
     uint16_t end = startAddr + len;
 
     for (uint16_t a = startAddr; a < end; ++a){
-        if (a == MB_TORQUE_ENABLE){
+        if (a == MB_TORQUE_ENABLE){ 
             EnableTorque(sid(), (uint8_t)MODBUS_Reg[MB_TORQUE_ENABLE]);
             continue;
         }
@@ -119,6 +142,14 @@ void SCS_Bridge_OnWrite(uint16_t startAddr, uint16_t len){
         if (a == MB_GOAL_POS || a == MB_GOAL_SPEED || a == MB_GOAL_TIME){
             touched_goal = true;
         }
+				
+				 // 兼容第二个舵机
+        if (a == MB_GOAL_POS2 || a == MB_GOAL_SPEED2 || a == MB_GOAL_TIME2) {
+            touched_goal = true;
+            WritePos(3, MODBUS_Reg[MB_GOAL_POS2], MODBUS_Reg[MB_GOAL_TIME2], MODBUS_Reg[MB_GOAL_SPEED2]);
+        }
+				
+				
       // 兼容ACTION =1
         if (a == MB_ACTION && MODBUS_Reg[MB_ACTION]){
             MODBUS_Reg[MB_DEBUG_FLAGS] |= 0x02; // bit1:??/?/?/Action ??
@@ -147,6 +178,7 @@ void SCS_Bridge_Poll_20ms(void){
     if (HAL_GetTick() - tick < 20) return;
     tick = HAL_GetTick();
 
+	   // 读取第一个舵机
     uint8_t id = sid();
     int v;
 
@@ -162,6 +194,22 @@ void SCS_Bridge_Poll_20ms(void){
         if (deg > 270) deg = 270;
         MODBUS_Reg[MB_PRESENT_ANGLE_DEG] = deg;     // 0x010C
     }
+		
+		  // 读取第二个舵机
+    uint8_t id2 = 2;  // 第二个舵机的 ID
+    v = ReadPos(id2);
+    if (v >= 0) {
+        MODBUS_Reg[MB_PRESENT_POS2] = (uint16_t)v;
+
+        // 步数 -> 角度
+        uint16_t steps = (uint16_t)v;
+        uint32_t t = (uint32_t)steps * 270u + 512u;
+        uint16_t deg = (uint16_t)(t >> 10);  
+        if (deg > 270) deg = 270;
+        MODBUS_Reg[MB_PRESENT_ANGLE_DEG2] = deg;  // 更新第二个舵机的角度
+    }
+		
+		
 	    // [LOOP PATCH] 循环状态A <-> B
     if (MODBUS_Reg[MB_LOOP_ENABLE]){
         uint16_t dwell = MODBUS_Reg[MB_LOOP_DWELL_MS];

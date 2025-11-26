@@ -11,7 +11,7 @@
 #include "SCSCL.h"
 
 static uint8_t Mem[SCSCL_PRESENT_CURRENT_H-SCSCL_PRESENT_POSITION_L+1];
-int WritePos(uint8_t ID, uint16_t Position, uint16_t Time, uint16_t Speed)
+int WritePos(uint8_t ID, uint16_t Position, uint16_t Time, uint16_t Speed) // 舵机运动层 运动到哪个位置 运动时间以及运动速度 
 {
 	uint8_t bBuf[6];
 	Host2SCS(bBuf+0, bBuf+1, Position);

@@ -32,7 +32,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x68CD1477)
 I (../Core/Inc/tim.h)(0x684588D4)
 I (../Core/Inc/usart.h)(0x68E74BDC)
 I (../Core/Inc/gpio.h)(0x683A8668)
-I (..\MODBUS_SLAVE\MODBUS_SLAVE.h)(0x68F985D9)
+I (..\MODBUS_SLAVE\MODBUS_SLAVE.h)(0x6926EC39)
 I (..\MODBUS_SLAVE\my_system.h)(0x6843F262)
 F (../Core/Src/gpio.c)(0x68E74CA9)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\SCS -I ..\MODBUS_SLAVE-I.\RTE\_SLAVE-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o led_demo\gpio.o --omf_browse led_demo\gpio.crf --depend led_demo\gpio.d)
 I (../Core/Inc/gpio.h)(0x683A8668)
@@ -603,8 +603,8 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x68CD1477)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x68CD1477)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x68CD1477)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x68CD1477)
-F (..\MODBUS_SLAVE\MODBUS_SLAVE.c)(0x68F9890D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\SCS -I ..\MODBUS_SLAVE-I.\RTE\_SLAVE-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o led_demo\modbus_slave.o --omf_browse led_demo\modbus_slave.crf --depend led_demo\modbus_slave.d)
-I (..\MODBUS_SLAVE\MODBUS_SLAVE.h)(0x68F985D9)
+F (..\MODBUS_SLAVE\MODBUS_SLAVE.c)(0x6926F551)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\SCS -I ..\MODBUS_SLAVE-I.\RTE\_SLAVE-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o led_demo\modbus_slave.o --omf_browse led_demo\modbus_slave.crf --depend led_demo\modbus_slave.d)
+I (..\MODBUS_SLAVE\MODBUS_SLAVE.h)(0x6926EC39)
 I (../Core/Inc/main.h)(0x68E74CAA)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x68CD1477)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x6843EEA0)
@@ -636,8 +636,8 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x68CD1477)
 I (../Core/Inc/gpio.h)(0x683A8668)
 I (..\MODBUS_SLAVE\my_system.h)(0x6843F262)
 I (..\SCS\scs_modbus_bridge.h)(0x68E86423)
-F (..\MODBUS_SLAVE\my_system.c)(0x68F9ECD8)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\SCS -I ..\MODBUS_SLAVE-I.\RTE\_SLAVE-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o led_demo\my_system.o --omf_browse led_demo\my_system.crf --depend led_demo\my_system.d)
-I (..\MODBUS_SLAVE\MODBUS_SLAVE.h)(0x68F985D9)
+F (..\MODBUS_SLAVE\my_system.c)(0x69202F9B)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\SCS -I ..\MODBUS_SLAVE-I.\RTE\_SLAVE-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o led_demo\my_system.o --omf_browse led_demo\my_system.crf --depend led_demo\my_system.d)
+I (..\MODBUS_SLAVE\MODBUS_SLAVE.h)(0x6926EC39)
 I (../Core/Inc/main.h)(0x68E74CAA)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x68CD1477)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x6843EEA0)
@@ -669,12 +669,12 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x68CD1477)
 I (../Core/Inc/gpio.h)(0x683A8668)
 I (..\MODBUS_SLAVE\my_system.h)(0x6843F262)
 I (..\SCS\scs_modbus_bridge.h)(0x68E86423)
-F (..\SCS\SCS.c)(0x6889D10A)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\SCS -I ..\MODBUS_SLAVE-I.\RTE\_SLAVE-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o led_demo\scs.o --omf_browse led_demo\scs.crf --depend led_demo\scs.d)
+F (..\SCS\SCS.c)(0x69207146)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\SCS -I ..\MODBUS_SLAVE-I.\RTE\_SLAVE-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o led_demo\scs.o --omf_browse led_demo\scs.crf --depend led_demo\scs.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x588B8344)
 I (..\SCS\INST.h)(0x6889D10A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588B8344)
 I (..\SCS\SCS.h)(0x6889D10A)
-F (..\SCS\scs_modbus_bridge.c)(0x691D6164)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\SCS -I ..\MODBUS_SLAVE-I.\RTE\_SLAVE-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o led_demo\scs_modbus_bridge.o --omf_browse led_demo\scs_modbus_bridge.crf --depend led_demo\scs_modbus_bridge.d)
+F (..\SCS\scs_modbus_bridge.c)(0x6926F5D5)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\SCS -I ..\MODBUS_SLAVE-I.\RTE\_SLAVE-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o led_demo\scs_modbus_bridge.o --omf_browse led_demo\scs_modbus_bridge.crf --depend led_demo\scs_modbus_bridge.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x68CD1477)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x6843EEA0)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x68CD1477)
@@ -704,7 +704,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x68CD1477)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x68CD1477)
 I (..\SCS\SCS.h)(0x6889D10A)
 I (..\SCS\SCSCL.h)(0x6889D10A)
-I (..\MODBUS_SLAVE\MODBUS_SLAVE.h)(0x68F985D9)
+I (..\MODBUS_SLAVE\MODBUS_SLAVE.h)(0x6926EC39)
 I (../Core/Inc/main.h)(0x68E74CAA)
 I (../Core/Inc/gpio.h)(0x683A8668)
 I (..\MODBUS_SLAVE\my_system.h)(0x6843F262)
@@ -739,7 +739,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x68CD1477)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x68CD1477)
 I (../Core/Inc/usart.h)(0x68E74BDC)
 I (../Core/Inc/main.h)(0x68E74CAA)
-F (..\SCS\SCSCL.c)(0x6889D10A)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\SCS -I ..\MODBUS_SLAVE-I.\RTE\_SLAVE-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o led_demo\scscl.o --omf_browse led_demo\scscl.crf --depend led_demo\scscl.d)
+F (..\SCS\SCSCL.c)(0x6926C6B5)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\SCS -I ..\MODBUS_SLAVE-I.\RTE\_SLAVE-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_MD -DUSE_HAL_DRIVER -DSTM32F103xB-o led_demo\scscl.o --omf_browse led_demo\scscl.crf --depend led_demo\scscl.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x588B8344)
 I (..\SCS\INST.h)(0x6889D10A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588B8344)

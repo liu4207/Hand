@@ -139,8 +139,11 @@ void MODBUS_Init(void)
   modbus.time_run = 0;
  SCS_Bridge_Init();
 	MODBUS_Reg[MB_SERVO_ID]   = 1;
+	MODBUS_Reg[MB_SERVO_ID2] =  3;  // …Ë÷√∂Êª˙ 2 £®ID2£©
   MODBUS_Reg[MB_GOAL_SPEED] = 1500;
+	MODBUS_Reg[MB_GOAL_SPEED2] = 1500;
   MODBUS_Reg[MB_GOAL_TIME]  = 0;
+	MODBUS_Reg[MB_GOAL_TIME2]  = 0;
 }
 
 void LED_TEST(void) //led1 led2:0

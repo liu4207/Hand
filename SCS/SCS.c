@@ -20,7 +20,7 @@ uint8_t *syncReadRxBuff;
 uint16_t syncReadRxBuffLen;
 uint16_t syncReadRxBuffMax;
 
-void setEnd(uint8_t _End)
+void setEnd(uint8_t _End)//选择大端小端
 {
 	End = _End;
 }
@@ -30,7 +30,7 @@ uint8_t getEnd(void)
 	return End;
 }
 
-void setLevel(uint8_t _Level)
+void setLevel(uint8_t _Level)//设置舵机的返回等级，通常是用于控制是否启用舵机的应答功能。
 {
 	Level = _Level;
 }
@@ -52,9 +52,9 @@ void Host2SCS(uint8_t *DataL, uint8_t* DataH, int Data)
 	if(End){
 		*DataL = (Data>>8);
 		*DataH = (Data&0xff);
-	}else{
-		*DataH = (Data>>8);
-		*DataL = (Data&0xff);
+	}else{//,默认小端 低字节在前面 高字节在后面
+		*DataH = (Data>>8);//高字节
+		*DataL = (Data&0xff);//低字节 16位与8位取掩码 所以得到后八位也就是低八位的值
 	}
 }
 
@@ -68,9 +68,9 @@ int SCS2Host(uint8_t DataL, uint8_t DataH)
 		Data<<=8;
 		Data |= DataH;
 	}else{
-		Data = DataH;
-		Data<<=8;
-		Data |= DataL;
+		Data = DataH;//先得到高八位（高字节在高位）
+		Data<<=8;//然后把高八位左移 右侧空出低八位的位置
+		Data |= DataL;//然后在和低八位取或运算 整合进来低八位 解码成功
 	}
 	return Data;
 }

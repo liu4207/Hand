@@ -83,7 +83,29 @@ void RS485_Send_Array(uint8_t* array,uint16_t len);
 #define MB_LOOP_SPEED      (MB_SERVO_BASE + 19)   // 0x0113:循环速度
 #define MB_LOOP_TIME       (MB_SERVO_BASE + 20)   // 0x0114:循环时间，与速度二选一
 
-
+//新的舵机 id==2
+// 舵机2控制寄存器
+#define MB_SERVO_ID2         (MB_SERVO_BASE + 50)  // 0x0132:舵机2 ID
+#define MB_GOAL_POS2         (MB_SERVO_BASE + 51)  // 0x0133:舵机2 目标位置
+#define MB_GOAL_SPEED2       (MB_SERVO_BASE + 52)  // 0x0134:舵机2 目标速度
+#define MB_GOAL_TIME2        (MB_SERVO_BASE + 53)  // 0x0135:舵机2 运动时间
+#define MB_TORQUE_ENABLE2    (MB_SERVO_BASE + 54)  // 0x0136:舵机2 力矩使能
+#define MB_PRESENT_POS2      (MB_SERVO_BASE + 55)  // 0x0137:舵机2 读取位置
+#define MB_PRESENT_SPEED2    (MB_SERVO_BASE + 56)  // 0x0138:舵机2 读取速度
+#define MB_PRESENT_LOAD2     (MB_SERVO_BASE + 57)  // 0x0139:舵机2 读取负载
+#define MB_PRESENT_VOLT2     (MB_SERVO_BASE + 58)  // 0x013A:舵机2 读取电压
+#define MB_PRESENT_TEMP2     (MB_SERVO_BASE + 59)  // 0x013B:舵机2 读取温度
+#define MB_PRESENT_CURR2     (MB_SERVO_BASE + 60)  // 0x013C:舵机2 读取电流
+#define MB_ACTION2           (MB_SERVO_BASE + 61)  // 0x013D:舵机2 写1触发动作
+#define MB_PRESENT_ANGLE_DEG2 (MB_SERVO_BASE + 62) // 0x013E:舵机2 当前角度（度）
+#define MB_DEBUG_LAST_STEPS2 (MB_SERVO_BASE + 63)  // 0x013F:舵机2 最近一次下发的步数
+#define MB_DEBUG_FLAGS2      (MB_SERVO_BASE + 64)  // 0x0140:舵机2 调试标志位
+#define MB_LOOP_ENABLE2      (MB_SERVO_BASE + 65)  // 0x0141:舵机2 循环启用（0=关闭, 1=开启）
+#define MB_LOOP_ANGLE_A2     (MB_SERVO_BASE + 66)  // 0x0142:舵机2 A 角度
+#define MB_LOOP_ANGLE_B2     (MB_SERVO_BASE + 67)  // 0x0143:舵机2 B 角度
+#define MB_LOOP_DWELL_MS2    (MB_SERVO_BASE + 68)  // 0x0144:舵机2 到位停留时间（ms）
+#define MB_LOOP_SPEED2       (MB_SERVO_BASE + 69)  // 0x0145:舵机2 循环速度
+#define MB_LOOP_TIME2        (MB_SERVO_BASE + 70)  // 0x0146:舵机2 循环时间（与速度二选一）
 
 typedef enum
 {
