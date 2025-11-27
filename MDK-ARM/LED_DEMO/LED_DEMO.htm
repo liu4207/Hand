@@ -3,7 +3,7 @@
 <title>Static Call Graph - [LED_DEMO\LED_DEMO.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image LED_DEMO\LED_DEMO.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Wed Nov 26 20:43:02 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Thu Nov 27 16:54:29 2025
 <BR><P>
 <H3>Maximum Stack Usage =        280 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -676,7 +676,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MODBUS_EVENT_PRO
 </UL>
 
-<P><STRONG><a name="[7f]"></a>MODBUS_Init</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, modbus_slave.o(i.MODBUS_Init))
+<P><STRONG><a name="[7f]"></a>MODBUS_Init</STRONG> (Thumb, 88 bytes, Stack size 16 bytes, modbus_slave.o(i.MODBUS_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = MODBUS_Init &rArr; SCS_Bridge_Init &rArr; EnableTorque &rArr; writeByte &rArr; Ack &rArr; checkHead &rArr; readSCS &rArr; ftUart_Read &rArr; HAL_UART_Receive &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_Bridge_Init
@@ -848,14 +848,14 @@ Global Symbols
 <LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MODBUS_Init
 </UL>
 
-<P><STRONG><a name="[7e]"></a>SCS_Bridge_OnWrite</STRONG> (Thumb, 212 bytes, Stack size 40 bytes, scs_modbus_bridge.o(i.SCS_Bridge_OnWrite))
+<P><STRONG><a name="[7e]"></a>SCS_Bridge_OnWrite</STRONG> (Thumb, 368 bytes, Stack size 40 bytes, scs_modbus_bridge.o(i.SCS_Bridge_OnWrite))
 <BR><BR>[Stack]<UL><LI>Max Depth = 232<LI>Call Chain = SCS_Bridge_OnWrite &rArr; SCS_LoopStartNow &rArr; SCS_GoAngleDeg &rArr; WritePos &rArr; genWrite &rArr; Ack &rArr; checkHead &rArr; readSCS &rArr; ftUart_Read &rArr; HAL_UART_Receive &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WritePos
 <LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EnableTorque
-<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sid
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sid
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_LoopStartNow
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_ExecWritePos
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_ExecWritePos
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MODBUS_FUNCTION_10
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MODBUS_FUNCTION_06
@@ -871,7 +871,7 @@ Global Symbols
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadPos
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadLoad
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadCurrent
-<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sid
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sid
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_LoopStartNow
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_GoAngleDeg
 </UL>
@@ -957,7 +957,7 @@ Global Symbols
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Host2SCS
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_GoAngleDeg
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_ExecWritePos
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_ExecWritePos
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_Bridge_OnWrite
 </UL>
 
@@ -1204,11 +1204,11 @@ Local Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> my_system.o(.data)
 </UL>
-<P><STRONG><a name="[99]"></a>SCS_ExecWritePos</STRONG> (Thumb, 104 bytes, Stack size 16 bytes, scs_modbus_bridge.o(i.SCS_ExecWritePos))
+<P><STRONG><a name="[9a]"></a>SCS_ExecWritePos</STRONG> (Thumb, 104 bytes, Stack size 16 bytes, scs_modbus_bridge.o(i.SCS_ExecWritePos))
 <BR><BR>[Stack]<UL><LI>Max Depth = 176<LI>Call Chain = SCS_ExecWritePos &rArr; WritePos &rArr; genWrite &rArr; Ack &rArr; checkHead &rArr; readSCS &rArr; ftUart_Read &rArr; HAL_UART_Receive &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WritePos
-<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sid
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sid
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_Bridge_OnWrite
 </UL>
@@ -1217,7 +1217,7 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = SCS_GoAngleDeg &rArr; WritePos &rArr; genWrite &rArr; Ack &rArr; checkHead &rArr; readSCS &rArr; ftUart_Read &rArr; HAL_UART_Receive &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WritePos
-<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sid
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sid
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_LoopStartNow
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_Bridge_Poll_20ms
@@ -1232,9 +1232,9 @@ Local Symbols
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_Bridge_OnWrite
 </UL>
 
-<P><STRONG><a name="[9a]"></a>sid</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, scs_modbus_bridge.o(i.sid))
+<P><STRONG><a name="[99]"></a>sid</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, scs_modbus_bridge.o(i.sid))
 <BR><BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_GoAngleDeg
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_ExecWritePos
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_ExecWritePos
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_Bridge_Poll_20ms
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SCS_Bridge_OnWrite
 </UL>

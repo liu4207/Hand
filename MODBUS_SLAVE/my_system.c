@@ -22,7 +22,7 @@ static void Per_Init(void)
 static void System_Run(void)
 {  
 	  MODBUS_EVENT_PRO();	
-	LED_TEST();
+	  LED_TEST();
 	  SCS_Bridge_Poll_20ms(); 
 	  RS485_EN_R;
 	  HAL_UART_Receive_IT(&huart3,&ch,1);

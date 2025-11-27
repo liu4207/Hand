@@ -57,8 +57,8 @@ void RS485_Send_Array(uint8_t* array,uint16_t len);
 
 
 #define MB_SERVO_BASE        0x0100
-#define MB_SERVO_ID          (MB_SERVO_BASE + 0)   // 0x0100:舵机id
-#define MB_GOAL_POS          (MB_SERVO_BASE + 1)   // 0x0101:目标位置
+//#define MB_SERVO_ID          (MB_SERVO_BASE + 0)   // 0x0100:舵机id
+//#define MB_GOAL_POS          (MB_SERVO_BASE + 1)   // 0x0101:目标位置
 #define MB_GOAL_SPEED        (MB_SERVO_BASE + 2)   // 0x0102:目标速度
 #define MB_GOAL_TIME         (MB_SERVO_BASE + 3)   // 0x0103:运动时间
 #define MB_TORQUE_ENABLE     (MB_SERVO_BASE + 4)   // 0x0104:力矩使能
@@ -85,8 +85,8 @@ void RS485_Send_Array(uint8_t* array,uint16_t len);
 
 //新的舵机 id==2
 // 舵机2控制寄存器
-#define MB_SERVO_ID2         (MB_SERVO_BASE + 50)  // 0x0132:舵机2 ID
-#define MB_GOAL_POS2         (MB_SERVO_BASE + 51)  // 0x0133:舵机2 目标位置
+//#define MB_SERVO_ID2         (MB_SERVO_BASE + 50)  // 0x0132:舵机2 ID
+//#define MB_GOAL_POS2         (MB_SERVO_BASE + 51)  // 0x0133:舵机2 目标位置
 #define MB_GOAL_SPEED2       (MB_SERVO_BASE + 52)  // 0x0134:舵机2 目标速度
 #define MB_GOAL_TIME2        (MB_SERVO_BASE + 53)  // 0x0135:舵机2 运动时间
 #define MB_TORQUE_ENABLE2    (MB_SERVO_BASE + 54)  // 0x0136:舵机2 力矩使能
@@ -106,6 +106,24 @@ void RS485_Send_Array(uint8_t* array,uint16_t len);
 #define MB_LOOP_DWELL_MS2    (MB_SERVO_BASE + 68)  // 0x0144:舵机2 到位停留时间（ms）
 #define MB_LOOP_SPEED2       (MB_SERVO_BASE + 69)  // 0x0145:舵机2 循环速度
 #define MB_LOOP_TIME2        (MB_SERVO_BASE + 70)  // 0x0146:舵机2 循环时间（与速度二选一）
+
+#define MB_GOAL_POS    (MB_SERVO_BASE + 81)  // 0x0151: 目标位置（ID1）
+#define MB_GOAL_POS2   (MB_SERVO_BASE + 82)  // 0x0152: 舵机 2 目标位置
+#define MB_GOAL_POS3   (MB_SERVO_BASE + 83)  // 0x0153: 舵机 3 目标位置
+#define MB_GOAL_POS4   (MB_SERVO_BASE + 84)  // 0x0154: 舵机 4 目标位置
+#define MB_GOAL_POS5   (MB_SERVO_BASE + 85)  // 0x0155: 舵机 5 目标位置
+#define MB_GOAL_POS6   (MB_SERVO_BASE + 86)  // 0x0156: 舵机 6 目标位置
+#define MB_GOAL_POS7   (MB_SERVO_BASE + 87)  // 0x0157: 舵机 7 目标位置
+#define MB_GOAL_POS8   (MB_SERVO_BASE + 88)  // 0x0158: 舵机 8 目标位置
+
+#define MB_SERVO_ID          (MB_SERVO_BASE + 90)   // 0x0100:舵机id
+#define MB_SERVO_ID2         (MB_SERVO_BASE + 91)  // 0x0132:舵机2 ID
+#define MB_SERVO_ID3         (MB_SERVO_BASE + 92)   // 0x0133: 舵机 3 ID
+#define MB_SERVO_ID4         (MB_SERVO_BASE + 93)   // 0x0134: 舵机 4 ID
+#define MB_SERVO_ID5         (MB_SERVO_BASE + 94)   // 0x0135: 舵机 5 ID
+#define MB_SERVO_ID6         (MB_SERVO_BASE + 95)   // 0x0136: 舵机 6 ID
+#define MB_SERVO_ID7         (MB_SERVO_BASE + 96)   // 0x0137: 舵机 7 ID
+#define MB_SERVO_ID8         (MB_SERVO_BASE + 97)   // 0x0138: 舵机 8 ID
 
 typedef enum
 {

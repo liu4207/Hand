@@ -130,7 +130,7 @@ void SCS_Bridge_Init(void)
 
 
 void SCS_Bridge_OnWrite(uint16_t startAddr, uint16_t len){
-    bool touched_goal = false;
+    bool touched_goal = false; //用来标记是否已经触发了目标位置（目标角度、速度、时间等）的写操作
     uint16_t end = startAddr + len;
 
     for (uint16_t a = startAddr; a < end; ++a){
@@ -140,15 +140,38 @@ void SCS_Bridge_OnWrite(uint16_t startAddr, uint16_t len){
         }
          // 即写即动触发源：角度/速度/时间 任一被写
         if (a == MB_GOAL_POS || a == MB_GOAL_SPEED || a == MB_GOAL_TIME){
+					 WritePos(MODBUS_Reg[MB_SERVO_ID], MODBUS_Reg[MB_GOAL_POS], MODBUS_Reg[MB_GOAL_TIME], MODBUS_Reg[MB_GOAL_SPEED]);
             touched_goal = true;
         }
 				
 				 // 兼容第二个舵机
         if (a == MB_GOAL_POS2 || a == MB_GOAL_SPEED2 || a == MB_GOAL_TIME2) {
             touched_goal = true;
-            WritePos(3, MODBUS_Reg[MB_GOAL_POS2], MODBUS_Reg[MB_GOAL_TIME2], MODBUS_Reg[MB_GOAL_SPEED2]);
+            WritePos(MODBUS_Reg[MB_SERVO_ID2], MODBUS_Reg[MB_GOAL_POS2], MODBUS_Reg[MB_GOAL_TIME2], MODBUS_Reg[MB_GOAL_SPEED2]);
         }
 				
+				if (a == MB_GOAL_POS3) {
+            //touched_goal = true;
+            WritePos(MODBUS_Reg[MB_SERVO_ID3], MODBUS_Reg[MB_GOAL_POS3], MODBUS_Reg[MB_GOAL_TIME2], MODBUS_Reg[MB_GOAL_SPEED2]);
+        }
+				if (a == MB_GOAL_POS4) {
+            //touched_goal = true;
+            WritePos(MODBUS_Reg[MB_SERVO_ID4], MODBUS_Reg[MB_GOAL_POS4], MODBUS_Reg[MB_GOAL_TIME2], MODBUS_Reg[MB_GOAL_SPEED2]);
+        }
+        if (a == MB_GOAL_POS5) {
+            //touched_goal = true;
+            WritePos(MODBUS_Reg[MB_SERVO_ID5], MODBUS_Reg[MB_GOAL_POS5], MODBUS_Reg[MB_GOAL_TIME2], MODBUS_Reg[MB_GOAL_SPEED2]);
+        }
+        if (a == MB_GOAL_POS6) {
+            //touched_goal = true;
+            WritePos(MODBUS_Reg[MB_SERVO_ID6], MODBUS_Reg[MB_GOAL_POS6], MODBUS_Reg[MB_GOAL_TIME2], MODBUS_Reg[MB_GOAL_SPEED2]);
+        }
+        if (a == MB_GOAL_POS7) {
+            //touched_goal = true;
+            WritePos(MODBUS_Reg[MB_SERVO_ID7], MODBUS_Reg[MB_GOAL_POS7], MODBUS_Reg[MB_GOAL_TIME2], MODBUS_Reg[MB_GOAL_SPEED2]);
+        }
+				
+
 				
       // 兼容ACTION =1
         if (a == MB_ACTION && MODBUS_Reg[MB_ACTION]){

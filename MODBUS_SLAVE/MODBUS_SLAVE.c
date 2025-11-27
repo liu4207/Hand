@@ -139,9 +139,16 @@ void MODBUS_Init(void)
   modbus.time_run = 0;
  SCS_Bridge_Init();
 	MODBUS_Reg[MB_SERVO_ID]   = 1;
-	MODBUS_Reg[MB_SERVO_ID2] =  3;  // 设置舵机 2 （ID2）
+	MODBUS_Reg[MB_SERVO_ID2] =  2;  // 设置舵机 2 （ID2）
+	    MODBUS_Reg[MB_SERVO_ID3]  = 3;  // 设置舵机 3 的 ID 为 3
+    MODBUS_Reg[MB_SERVO_ID4]  = 4;  // 设置舵机 4 的 ID 为 4
+    MODBUS_Reg[MB_SERVO_ID5]  = 5;  // 设置舵机 5 的 ID 为 5
+    MODBUS_Reg[MB_SERVO_ID6]  = 6;  // 设置舵机 6 的 ID 为 6
+    MODBUS_Reg[MB_SERVO_ID7]  = 7;  // 设置舵机 7 的 ID 为 7
+    MODBUS_Reg[MB_SERVO_ID8]  = 8;  // 设置舵机 8 的 ID 为 8
   MODBUS_Reg[MB_GOAL_SPEED] = 1500;
 	MODBUS_Reg[MB_GOAL_SPEED2] = 1500;
+
   MODBUS_Reg[MB_GOAL_TIME]  = 0;
 	MODBUS_Reg[MB_GOAL_TIME2]  = 0;
 }
