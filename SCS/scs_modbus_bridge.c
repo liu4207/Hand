@@ -85,7 +85,7 @@ static uint16_t angle_deg_to_steps(uint16_t angle_raw){
 }
 
 // 通道化执行：把“角度寄存器”换算为步数后写入对应舵机
-static void SCS_ExecWritePosN(uint16_t reg_id, uint16_t reg_pos,
+void SCS_ExecWritePosN(uint16_t reg_id, uint16_t reg_pos,
                               uint16_t reg_time, uint16_t reg_speed)
 {
     uint8_t  id    = (uint8_t)MODBUS_Reg[reg_id];
@@ -132,7 +132,9 @@ void SCS_Bridge_OnWrite(uint16_t startAddr, uint16_t len)
                          (uint8_t)MODBUS_Reg[MB_TORQUE_ENABLE]);
             continue;
         }
-
+				//
+			
+				
         // === 即写即动触发源：任一被写，就标记对应通道 ===
         if (a==MB_GOAL_POS || a==MB_GOAL_SPEED || a==MB_GOAL_TIME) t1=true;
         if (a==MB_GOAL_POS2|| a==MB_GOAL_SPEED|| a==MB_GOAL_TIME) t2=true;

@@ -107,7 +107,7 @@ int main(void)
   HAL_Delay(1000);
   HAL_TIM_Base_Start_IT(&htim3); 
   HAL_TIM_Base_Start_IT(&htim2);
-//system.Per_Init();
+  system.Per_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -115,17 +115,19 @@ int main(void)
   while (1)
   {
 //	  HAL_UART_Transmit(&hlpuart1, (uint8_t*)"1234", 4, 100);  
-//	  HAL_Delay(5000);
+	//  HAL_Delay(5000);
 //		ReceiveOneSensor_Print();
-//		HAL_Delay(10);
+		HAL_Delay(1000);
+
+		/*
 		if (tick10ms) {
         tick10ms = 0;
       ReceiveOneSensor();  // 你已有的函数：轮询 0x0A~0x0E 并 printf
 
-    }
+    }*/
 
     
-//system.System_Run();
+     system.System_Run();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
