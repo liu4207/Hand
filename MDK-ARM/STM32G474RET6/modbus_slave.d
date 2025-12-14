@@ -39,3 +39,6 @@ stm32g474ret6\modbus_slave.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_
 stm32g474ret6\modbus_slave.o: ../Core/Inc/gpio.h
 stm32g474ret6\modbus_slave.o: ..\MODBUS_SLAVE\my_system.h
 stm32g474ret6\modbus_slave.o: ../SCS/scs_modbus_bridge.h
+stm32g474ret6\modbus_slave.o: ..\Las10\las10_bridge.h
+stm32g474ret6\modbus_slave.o: ../Core/Inc/usart.h
+stm32g474ret6\modbus_slave.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

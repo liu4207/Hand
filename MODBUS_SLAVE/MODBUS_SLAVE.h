@@ -49,8 +49,8 @@ void RS485_Send_Byte(uint8_t Byte);
 void RS485_Send_Array(uint8_t* array,uint16_t len);
 
 //MODBUS RTU
-#define MODBUS_ADDR_LED1   0x0000
-#define MODBUS_ADDR_LED2   0x0001
+#define MODBUS_ADDR_LED1   0x0100
+#define MODBUS_ADDR_LED2   0x0101
 
 
 #define MB_SERVO_BASE        0x0100
@@ -104,14 +104,14 @@ void RS485_Send_Array(uint8_t* array,uint16_t len);
 #define MB_LOOP_SPEED2       (MB_SERVO_BASE + 69)  // 0x0145:舵机2 循环速度
 #define MB_LOOP_TIME2        (MB_SERVO_BASE + 70)  // 0x0146:舵机2 循环时间（与速度二选一）
 
-#define MB_GOAL_POS    (MB_SERVO_BASE + 81)  // 0x0151: 目标位置（ID1）
-#define MB_GOAL_POS2   (MB_SERVO_BASE + 82)  // 0x0152: 舵机 2 目标位置
-#define MB_GOAL_POS3   (MB_SERVO_BASE + 83)  // 0x0153: 舵机 3 目标位置
-#define MB_GOAL_POS4   (MB_SERVO_BASE + 84)  // 0x0154: 舵机 4 目标位置
-#define MB_GOAL_POS5   (MB_SERVO_BASE + 85)  // 0x0155: 舵机 5 目标位置
-#define MB_GOAL_POS6   (MB_SERVO_BASE + 86)  // 0x0156: 舵机 6 目标位置
-#define MB_GOAL_POS7   (MB_SERVO_BASE + 87)  // 0x0157: 舵机 7 目标位置
-#define MB_GOAL_POS8   (MB_SERVO_BASE + 88)  // 0x0158: 舵机 8 目标位置
+//#define MB_GOAL_POS    (MB_SERVO_BASE + 81)  // 0x0151: 目标位置（ID1）
+//#define MB_GOAL_POS2   (MB_SERVO_BASE + 82)  // 0x0152: 舵机 2 目标位置
+//#define MB_GOAL_POS3   (MB_SERVO_BASE + 83)  // 0x0153: 舵机 3 目标位置
+//#define MB_GOAL_POS4   (MB_SERVO_BASE + 84)  // 0x0154: 舵机 4 目标位置
+//#define MB_GOAL_POS5   (MB_SERVO_BASE + 85)  // 0x0155: 舵机 5 目标位置
+//#define MB_GOAL_POS6   (MB_SERVO_BASE + 86)  // 0x0156: 舵机 6 目标位置
+//#define MB_GOAL_POS7   (MB_SERVO_BASE + 87)  // 0x0157: 舵机 7 目标位置
+//#define MB_GOAL_POS8   (MB_SERVO_BASE + 88)  // 0x0158: 舵机 8 目标位置
 
 #define MB_SERVO_ID          (MB_SERVO_BASE + 90)   // 0x0100:舵机id
 #define MB_SERVO_ID2         (MB_SERVO_BASE + 91)  // 0x0132:舵机2 ID
@@ -124,6 +124,39 @@ void RS485_Send_Array(uint8_t* array,uint16_t len);
 #define MB_SERVO_ID7         (MB_SERVO_BASE + 96)   // 0x0137: 舵机 7 ID
 #define MB_SERVO_ID8         (MB_SERVO_BASE + 97)   // 0x0138: 舵机 8 ID
 
+
+#define MB_GOAL_POS    (MB_SERVO_BASE + 81)  // 0x0151: 目标位置（ID1）
+#define MB_GOAL_POS2   (MB_SERVO_BASE + 82)  // 0x0152: 舵机 2 目标位置
+#define MB_GOAL_POS3   (MB_SERVO_BASE + 83)  // 0x0153: 舵机 3 目标位置
+#define MB_GOAL_POS4   (MB_SERVO_BASE + 84)  // 0x0154: 舵机 4 目标位置
+#define MB_GOAL_POS5   (MB_SERVO_BASE + 85)  // 0x0155: 舵机 5 目标位置
+#define MB_GOAL_POS6   (MB_SERVO_BASE + 86)  // 0x0156: 舵机 6 目标位置
+#define MB_GOAL_POS7   (MB_SERVO_BASE + 87)  // 0x0157: 舵机 7 目标位置
+#define MB_GOAL_POS8   (MB_SERVO_BASE + 88)  // 0x0158: 舵机 8 目标位置
+
+
+/* === 在这里追加 LAS 桥接使用的保持寄存器地址 === */
+#define MB_ADDR_LAS_CMD           0x0000
+#define MB_ADDR_LAS_GOAL_POS      0x0001
+#define MB_ADDR_LAS_CUR_POS       0x0002
+#define MB_ADDR_LAS_TEMP_C        0x0003
+#define MB_ADDR_LAS_CURRENT_MA    0x0004
+#define MB_ADDR_LAS_ERR_BITS      0x0005
+#define MB_ADDR_LAS_FORCE_G       0x0006
+#define MB_ADDR_LAS_GOAL_ECHO     0x0007
+#define MB_ADDR_LAS_ID            0x0008
+#define MB_ADDR_LAS_BAUD_CODE     0x0009
+#define MB_ADDR_LAS_OCP_MA        0x000A
+#define MB_ADDR_LAS_OTP_X10C      0x000B
+#define MB_ADDR_LAS_RESUME_X10C   0x000C
+
+/* ===== 多电缸块大小（一个电缸占用 0x0100 个地址） ===== */
+#define LAS_MB_BLOCK_SIZE      0x0100   /* #1:0x0000~0x00FF, #2:0x0100~0x01FF, ... */
+
+/* 总寄存器容量：4 块 + 预留 16 个作扩展/Group */
+#define MODBUS_REG_SIZE     (4 * LAS_MB_BLOCK_SIZE + 0x25)
+
+
 typedef enum
 {
   MODBUS_FUN_ERROR = 0x01,
@@ -132,11 +165,17 @@ typedef enum
   MODBUS_DEVICE_ERROR = 0x04,  
 }ERROR_t; //异常码
 
+typedef struct
+{
+  uint16_t heart;
+  uint16_t temp;
+  uint16_t humi;  
+}SENSOR;
 
 void MODBUS_Init(void);
 void MODBUS_EVENT_PRO(void);
 void LED_TEST(void); //led1 led2:0
-
+extern SENSOR sensor;
 //MODBUS CRC校验
 uint16_t crc16( uint8_t *puchMsg, uint16_t usDataLen );
 

@@ -39,3 +39,6 @@ stm32g474ret6\my_system.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uar
 stm32g474ret6\my_system.o: ../Core/Inc/gpio.h
 stm32g474ret6\my_system.o: ..\MODBUS_SLAVE\my_system.h
 stm32g474ret6\my_system.o: ../SCS/scs_modbus_bridge.h
+stm32g474ret6\my_system.o: ..\Las10\las10_bridge.h
+stm32g474ret6\my_system.o: ../Core/Inc/usart.h
+stm32g474ret6\my_system.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

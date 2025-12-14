@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32G474xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32G4xx_HAL_Driver/Inc;../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32G4xx/Include;../Drivers/CMSIS/Include;../MODBUS_SLAVE;../SCS;../Sensor</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32G4xx_HAL_Driver/Inc;../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32G4xx/Include;../Drivers/CMSIS/Include;../MODBUS_SLAVE;../SCS;../Sensor;..\Las10</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -753,6 +753,16 @@
               <FileName>sensor_i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Sensor\sensor_i2c.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Las10</GroupName>
+          <Files>
+            <File>
+              <FileName>las10_bridge.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Las10\las10_bridge.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -37,6 +37,7 @@
 "stm32g474ret6\scscl.o"
 "stm32g474ret6\scserail.o"
 "stm32g474ret6\sensor_i2c.o"
+"stm32g474ret6\las10_bridge.o"
 --library_type=microlib --strict --scatter "stm32g474xx_flash.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

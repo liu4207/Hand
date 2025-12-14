@@ -1,6 +1,6 @@
 #include "MODBUS_SLAVE.h"
 #include "scs_modbus_bridge.h"
-
+#include "las10_bridge.h"
 
 //中断设置
 MODBUS modbus;
@@ -91,9 +91,10 @@ void RS485_Send_Array(uint8_t* array,uint16_t len)
 }
 
 //MODBUS RTU设置....................................................................................................................................................
-#define MODBUS_REG_CAP 0x0200   
-uint16_t MODBUS_Reg[MODBUS_REG_CAP] = {0};
+#define MODBUS_REG_CAP 0x0200
 
+//uint16_t MODBUS_Reg[MODBUS_REG_CAP] = {0};
+uint16_t MODBUS_Reg[MODBUS_REG_SIZE];
 
 void MODBUS_Init(void)
 {
@@ -113,6 +114,19 @@ void MODBUS_Init(void)
 
   MODBUS_Reg[MB_GOAL_TIME]  = 0;
 	MODBUS_Reg[MB_GOAL_TIME2]  = 0;
+	
+	//电缸部分如下
+	  /* 同一条 UART2 带多只 D 型电缸：分别给块基址与ID */
+  LASM_ClearAll();
+  LASM_Add(0, &huart1, 1, 0x0000, NULL, 0);  // 电缸#1 → ID=1  → 0x0000~0x00FF
+  LASM_Add(1, &huart1, 2, 0x0100, NULL, 0);  // 电缸#2 → ID=2  → 0x0100~0x01FF
+  // 继续加：
+  LASM_Add(2, &huart1, 3, 0x0200, NULL, 0);
+  LASM_Add(3, &huart1, 4, 0x0300, NULL, 0);
+	
+	MODBUS_Reg[MB_GRP_MASK] = 0x000F;
+	
+	//上面是电缸
 }
 
 void LED_TEST(void) //led1 led2:0
@@ -158,7 +172,9 @@ void MODBUS_FUNCTION_03(void)
   ADDR_LEN = modbus.modbus_buf[4]*256 + modbus.modbus_buf[5]; 
   LEN = 2*ADDR_LEN;
   modbus.send_buf[i++] = LEN;
-
+	//电缸
+LASM_OnReadMaybeRefresh(ADDR_STAR, ADDR_LEN); // ← 新：涉及到的电缸先刷新状态
+	
 	if (ADDR_STAR + ADDR_LEN > MODBUS_REG_CAP)
 		{
     MODBUS_ERROR(0x03, MODBUS_DATA_ADDR_ERROR);
@@ -197,6 +213,10 @@ void MODBUS_FUNCTION_06(void)
   Data = modbus.modbus_buf[4]*256 + modbus.modbus_buf[5]; 
 
   MODBUS_Reg[ADDR_STAR] = Data;
+		//电缸
+LASM_OnWriteSingle(ADDR_STAR, Data);  // ← 新：涉及到的电缸先刷新状态
+	
+	
   SCS_Bridge_OnWrite(ADDR_STAR, 1);
   modbus.send_buf[i++] = modbus.modbus_buf[2];
   modbus.send_buf[i++] = modbus.modbus_buf[3];
@@ -247,7 +267,8 @@ void MODBUS_FUNCTION_10(void)
   {
     MODBUS_Reg[ADDR_STAR + j] = modbus.modbus_buf[7 + 2*j]*256 + modbus.modbus_buf[7 + 2*j + 1];    
   }
-  
+	//新代码 电缸
+  LASM_OnWriteBlock(ADDR_STAR, &MODBUS_Reg[ADDR_STAR], ADDR_LEN); // ← 新
   
    SCS_Bridge_OnWrite(ADDR_STAR, ADDR_LEN);
   

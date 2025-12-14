@@ -104,6 +104,7 @@ int main(void)
   MX_I2C2_Init();
   MX_TIM2_Init();
   MX_TIM6_Init();
+  MX_TIM7_Init();
   /* USER CODE BEGIN 2 */
   HAL_Delay(1000);
   HAL_TIM_Base_Start_IT(&htim3); 
