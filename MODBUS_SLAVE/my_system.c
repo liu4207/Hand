@@ -34,14 +34,14 @@ static void System_Run(void)
 	  LED_TEST();
 	  SCS_Bridge_Poll_20ms(); 
 	
-		if (test1) {
-        test1 = 0;
+//		if (test1) {
+//        test1 = 0;
 
-        MODBUS_Reg[MB_GOAL_POS]   = g_dbg_deg;   // 角度
-		
-		        // 直接执行“角度->步数->WritePos”
-        SCS_ExecWritePosN(MB_SERVO_ID, MB_GOAL_POS, MB_GOAL_TIME, MB_GOAL_SPEED);
-    }
+//        MODBUS_Reg[MB_GOAL_POS]   = g_dbg_deg;   // 角度
+//		
+//		        // 直接执行“角度->步数->WritePos”
+//        SCS_ExecWritePosN(MB_SERVO_ID, MB_GOAL_POS, MB_GOAL_TIME, MB_GOAL_SPEED);
+//    }
 	
 	  HAL_UART_Receive_IT(&huart2,&ch,1);
 		

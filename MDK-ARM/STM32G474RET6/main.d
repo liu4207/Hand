@@ -43,4 +43,4 @@ stm32g474ret6\main.o: ../Core/Inc/gpio.h
 stm32g474ret6\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 stm32g474ret6\main.o: ../MODBUS_SLAVE/MODBUS_SLAVE.h
 stm32g474ret6\main.o: ../MODBUS_SLAVE/my_system.h
-stm32g474ret6\main.o: ..\Sensor\sensor_i2c.h
+stm32g474ret6\main.o: ../Sensor/sensor_i2c.h

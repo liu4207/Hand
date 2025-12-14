@@ -39,7 +39,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-uint8_t tick10ms = 0;  // ¶¨Ê±Æ÷Ã¿10msÖÃ1£¬Ö÷Ñ­»·ÀïÏû·Ñ
+uint8_t tick10ms = 0;  // ï¿½ï¿½Ê±ï¿½ï¿½Ã¿10msï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -103,10 +103,12 @@ int main(void)
   MX_TIM3_Init();
   MX_I2C2_Init();
   MX_TIM2_Init();
+  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
   HAL_Delay(1000);
   HAL_TIM_Base_Start_IT(&htim3); 
   HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_Base_Start_IT(&htim6);
   system.Per_Init();
   /* USER CODE END 2 */
 
@@ -117,12 +119,12 @@ int main(void)
 //	  HAL_UART_Transmit(&hlpuart1, (uint8_t*)"1234", 4, 100);  
 	//  HAL_Delay(5000);
 //		ReceiveOneSensor_Print();
-		HAL_Delay(1000);
+		//HAL_Delay(1000);
 
 		/*
 		if (tick10ms) {
         tick10ms = 0;
-      ReceiveOneSensor();  // ÄãÒÑÓÐµÄº¯Êý£ºÂÖÑ¯ 0x0A~0x0E ²¢ printf
+      ReceiveOneSensor();  // ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ 0x0A~0x0E ï¿½ï¿½ printf
 
     }*/
 
