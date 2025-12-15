@@ -42,7 +42,7 @@ I (../Core/Inc/usart.h)(0x691D9383)
 I (../Core/Inc/tim.h)(0x693EE912)
 I (../Core/Inc/gpio.h)(0x691D9382)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588B8344)
-I (../MODBUS_SLAVE/MODBUS_SLAVE.h)(0x693EF1CA)
+I (../MODBUS_SLAVE/MODBUS_SLAVE.h)(0x69400C71)
 I (../MODBUS_SLAVE/my_system.h)(0x692E9D06)
 I (../Sensor/sensor_i2c.h)(0x693BE3C4)
 F (../Core/Src/gpio.c)(0x693EE5E7)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../MODBUS_SLAVE -I ../SCS -I ../Sensor -I ..\Las10-I.\RTE\_STM32G474RET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32G4xx_DFP\1.5.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32G474xx -DUSE_HAL_DRIVER -DSTM32G474xx-o stm32g474ret6\gpio.o --omf_browse stm32g474ret6\gpio.crf --depend stm32g474ret6\gpio.d)
@@ -230,12 +230,12 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h)(0x6938E2C7)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h)(0x6938E2C7)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x6938E2C7)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x6938E2C7)
-I (../MODBUS_SLAVE/MODBUS_SLAVE.h)(0x693EF1CA)
+I (../MODBUS_SLAVE/MODBUS_SLAVE.h)(0x69400C71)
 I (../Core/Inc/gpio.h)(0x691D9382)
 I (../MODBUS_SLAVE/my_system.h)(0x692E9D06)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588B8344)
 I (../SCS/scs_modbus_bridge.h)(0x693EE443)
-I (..\Las10\las10_bridge.h)(0x692D4B26)
+I (..\Las10\las10_bridge.h)(0x694004BF)
 I (../Core/Inc/usart.h)(0x691D9383)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x588B8344)
 I (../Sensor/sensor_i2c.h)(0x693BE3C4)
@@ -1047,8 +1047,8 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h)(0x6938E2C7)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h)(0x6938E2C7)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x6938E2C7)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x6938E2C7)
-F (..\MODBUS_SLAVE\MODBUS_SLAVE.c)(0x693EF58F)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../MODBUS_SLAVE -I ../SCS -I ../Sensor -I ..\Las10-I.\RTE\_STM32G474RET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32G4xx_DFP\1.5.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32G474xx -DUSE_HAL_DRIVER -DSTM32G474xx-o stm32g474ret6\modbus_slave.o --omf_browse stm32g474ret6\modbus_slave.crf --depend stm32g474ret6\modbus_slave.d)
-I (..\MODBUS_SLAVE\MODBUS_SLAVE.h)(0x693EF1CA)
+F (..\MODBUS_SLAVE\MODBUS_SLAVE.c)(0x69400DB9)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../MODBUS_SLAVE -I ../SCS -I ../Sensor -I ..\Las10-I.\RTE\_STM32G474RET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32G4xx_DFP\1.5.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32G474xx -DUSE_HAL_DRIVER -DSTM32G474xx-o stm32g474ret6\modbus_slave.o --omf_browse stm32g474ret6\modbus_slave.crf --depend stm32g474ret6\modbus_slave.d)
+I (..\MODBUS_SLAVE\MODBUS_SLAVE.h)(0x69400C71)
 I (../Core/Inc/main.h)(0x691D9384)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x6938E2C7)
 I (../Core/Inc/stm32g4xx_hal_conf.h)(0x6938E2D3)
@@ -1087,11 +1087,11 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x6938E2C7)
 I (../Core/Inc/gpio.h)(0x691D9382)
 I (..\MODBUS_SLAVE\my_system.h)(0x692E9D06)
 I (../SCS/scs_modbus_bridge.h)(0x693EE443)
-I (..\Las10\las10_bridge.h)(0x692D4B26)
+I (..\Las10\las10_bridge.h)(0x694004BF)
 I (../Core/Inc/usart.h)(0x691D9383)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x588B8344)
-F (..\MODBUS_SLAVE\my_system.c)(0x693EF078)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../MODBUS_SLAVE -I ../SCS -I ../Sensor -I ..\Las10-I.\RTE\_STM32G474RET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32G4xx_DFP\1.5.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32G474xx -DUSE_HAL_DRIVER -DSTM32G474xx-o stm32g474ret6\my_system.o --omf_browse stm32g474ret6\my_system.crf --depend stm32g474ret6\my_system.d)
-I (..\MODBUS_SLAVE\MODBUS_SLAVE.h)(0x693EF1CA)
+F (..\MODBUS_SLAVE\my_system.c)(0x694004BF)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../MODBUS_SLAVE -I ../SCS -I ../Sensor -I ..\Las10-I.\RTE\_STM32G474RET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32G4xx_DFP\1.5.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32G474xx -DUSE_HAL_DRIVER -DSTM32G474xx-o stm32g474ret6\my_system.o --omf_browse stm32g474ret6\my_system.crf --depend stm32g474ret6\my_system.d)
+I (..\MODBUS_SLAVE\MODBUS_SLAVE.h)(0x69400C71)
 I (../Core/Inc/main.h)(0x691D9384)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x6938E2C7)
 I (../Core/Inc/stm32g4xx_hal_conf.h)(0x6938E2D3)
@@ -1130,7 +1130,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x6938E2C7)
 I (../Core/Inc/gpio.h)(0x691D9382)
 I (..\MODBUS_SLAVE\my_system.h)(0x692E9D06)
 I (../SCS/scs_modbus_bridge.h)(0x693EE443)
-I (..\Las10\las10_bridge.h)(0x692D4B26)
+I (..\Las10\las10_bridge.h)(0x694004BF)
 I (../Core/Inc/usart.h)(0x691D9383)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x588B8344)
 F (..\SCS\SCS.c)(0x692E9D06)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../MODBUS_SLAVE -I ../SCS -I ../Sensor -I ..\Las10-I.\RTE\_STM32G474RET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32G4xx_DFP\1.5.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32G474xx -DUSE_HAL_DRIVER -DSTM32G474xx-o stm32g474ret6\scs.o --omf_browse stm32g474ret6\scs.crf --depend stm32g474ret6\scs.d)
@@ -1138,7 +1138,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x588B8344)
 I (..\SCS\INST.h)(0x692E9D06)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588B8344)
 I (..\SCS\SCS.h)(0x692E9D06)
-F (..\SCS\scs_modbus_bridge.c)(0x693EE443)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../MODBUS_SLAVE -I ../SCS -I ../Sensor -I ..\Las10-I.\RTE\_STM32G474RET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32G4xx_DFP\1.5.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32G474xx -DUSE_HAL_DRIVER -DSTM32G474xx-o stm32g474ret6\scs_modbus_bridge.o --omf_browse stm32g474ret6\scs_modbus_bridge.crf --depend stm32g474ret6\scs_modbus_bridge.d)
+F (..\SCS\scs_modbus_bridge.c)(0x69400D62)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../MODBUS_SLAVE -I ../SCS -I ../Sensor -I ..\Las10-I.\RTE\_STM32G474RET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32G4xx_DFP\1.5.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32G474xx -DUSE_HAL_DRIVER -DSTM32G474xx-o stm32g474ret6\scs_modbus_bridge.o --omf_browse stm32g474ret6\scs_modbus_bridge.crf --depend stm32g474ret6\scs_modbus_bridge.d)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x6938E2C7)
 I (../Core/Inc/stm32g4xx_hal_conf.h)(0x6938E2D3)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h)(0x6938E2C7)
@@ -1175,7 +1175,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x6938E2C7)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x6938E2C7)
 I (..\SCS\SCS.h)(0x692E9D06)
 I (..\SCS\SCSCL.h)(0x692E9D06)
-I (../MODBUS_SLAVE/MODBUS_SLAVE.h)(0x693EF1CA)
+I (../MODBUS_SLAVE/MODBUS_SLAVE.h)(0x69400C71)
 I (../Core/Inc/main.h)(0x691D9384)
 I (../Core/Inc/gpio.h)(0x691D9382)
 I (../MODBUS_SLAVE/my_system.h)(0x692E9D06)
@@ -1301,12 +1301,12 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588B8344)
 I (../Core/Inc/i2c.h)(0x6938E2D2)
 I (../Core/Inc/usart.h)(0x691D9383)
 I (../Core/Inc/tim.h)(0x693EE912)
-I (../MODBUS_SLAVE/MODBUS_SLAVE.h)(0x693EF1CA)
+I (../MODBUS_SLAVE/MODBUS_SLAVE.h)(0x69400C71)
 I (../Core/Inc/gpio.h)(0x691D9382)
 I (../MODBUS_SLAVE/my_system.h)(0x692E9D06)
 I (../SCS/scs_modbus_bridge.h)(0x693EE443)
-F (..\Las10\las10_bridge.c)(0x693C518C)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../MODBUS_SLAVE -I ../SCS -I ../Sensor -I ..\Las10-I.\RTE\_STM32G474RET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32G4xx_DFP\1.5.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32G474xx -DUSE_HAL_DRIVER -DSTM32G474xx-o stm32g474ret6\las10_bridge.o --omf_browse stm32g474ret6\las10_bridge.crf --depend stm32g474ret6\las10_bridge.d)
-I (..\Las10\las10_bridge.h)(0x692D4B26)
+F (..\Las10\las10_bridge.c)(0x694004BF)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../MODBUS_SLAVE -I ../SCS -I ../Sensor -I ..\Las10-I.\RTE\_STM32G474RET6-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32G4xx_DFP\1.5.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32G474xx -DUSE_HAL_DRIVER -DSTM32G474xx-o stm32g474ret6\las10_bridge.o --omf_browse stm32g474ret6\las10_bridge.crf --depend stm32g474ret6\las10_bridge.d)
+I (..\Las10\las10_bridge.h)(0x694004BF)
 I (../Core/Inc/main.h)(0x691D9384)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x6938E2C7)
 I (../Core/Inc/stm32g4xx_hal_conf.h)(0x6938E2D3)
@@ -1345,3 +1345,6 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x6938E2C7)
 I (../Core/Inc/usart.h)(0x691D9383)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x588B8344)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x588B8344)
+I (../MODBUS_SLAVE/MODBUS_SLAVE.h)(0x69400C71)
+I (../Core/Inc/gpio.h)(0x691D9382)
+I (../MODBUS_SLAVE/my_system.h)(0x692E9D06)

@@ -1,6 +1,6 @@
 #include "las10_bridge.h"
 #include <string.h>
-
+#include "MODBUS_SLAVE.h"
 /* ===== 设备表 ===== */
 LAS10_Dev g_devs[LAS_MAX_DEV];
 static uint8_t   g_dev_count = 0;
@@ -353,8 +353,26 @@ static void las_status_to_regs_at(uint16_t base, const LAS10_Status* st, uint16_
     MODBUS_Reg[base + MB_ADDR_LAS_CURRENT_MA] = st->current_mA;
     MODBUS_Reg[base + MB_ADDR_LAS_FORCE_G]    = (uint16_t)st->force_g;
     MODBUS_Reg[base + MB_ADDR_LAS_ERR_BITS]   = st->err_bits;
-}
+		// las10_bridge.c 的 las_status_to_regs_at() 末尾加：
+	uint8_t idx = (uint8_t)(base / LAS_MB_BLOCK_SIZE); // base=0x0000/0x0100/...
+	if (idx < 4) {
+	int16_t cp = st->cur_pos;
+	if (cp < 0) cp = 0;
+	MODBUS_Reg[MB_FB_LAS_POS1 + idx] = (uint16_t)cp;
+	}
+	int16_t cp = st->cur_pos;
+if (cp < 0) cp = 0;
 
+int16_t goal = (int16_t)goal_echo;
+if (goal >= 0) {
+    int16_t d = cp - goal;
+    if (d < 0) d = -d;
+    if (d <= 2) cp = goal;   // 吸附到目标
+	
+}
+MODBUS_Reg[MB_FB_LAS_POS1 + idx] = (uint16_t)cp;
+
+}
 void LASM_OnWriteSingle(uint16_t mb_addr, uint16_t value)
 {
     static uint16_t g_grp_mask = 0x000F; // 默认全选 #1~#4
@@ -518,4 +536,23 @@ bool LAS10_QueryStatus_Dev(LAS10_Dev* dev, LAS10_Status* out, uint32_t timeout_u
 {
     return LAS10_SendMC_Dev(dev, LAS_MC_QUERY, out, timeout_us);
 }
+
+void LASM_Poll_50ms(void)
+{
+    static uint32_t tick = 0;
+    static uint8_t rr = 0;
+    if (HAL_GetTick() - tick < 20) return;
+    tick = HAL_GetTick();
+
+    if (g_dev_count == 0) return;
+    if (rr >= g_dev_count) rr = 0;
+
+    LAS10_Status st;
+    if (LAS10_QueryStatus_Dev(&g_devs[rr], &st, 100000)) {
+        // 这里会连同 Telemetry(0x0420..) 一起更新
+        las_status_to_regs_at(g_devs[rr].mb_base, &st,MODBUS_Reg[g_devs[rr].mb_base + MB_ADDR_LAS_GOAL_POS]);
+    }
+    rr++;
+}
+
 

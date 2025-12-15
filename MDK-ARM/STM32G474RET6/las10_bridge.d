@@ -39,3 +39,6 @@ stm32g474ret6\las10_bridge.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_
 stm32g474ret6\las10_bridge.o: ../Core/Inc/usart.h
 stm32g474ret6\las10_bridge.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 stm32g474ret6\las10_bridge.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+stm32g474ret6\las10_bridge.o: ../MODBUS_SLAVE/MODBUS_SLAVE.h
+stm32g474ret6\las10_bridge.o: ../Core/Inc/gpio.h
+stm32g474ret6\las10_bridge.o: ../MODBUS_SLAVE/my_system.h

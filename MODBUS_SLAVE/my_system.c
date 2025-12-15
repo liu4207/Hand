@@ -33,6 +33,7 @@ static void System_Run(void)
 	  MODBUS_EVENT_PRO();	
 	  LED_TEST();
 	  SCS_Bridge_Poll_20ms(); 
+	LASM_Poll_50ms();
 	  HAL_UART_Receive_IT(&huart2,&ch,1);
 		
 		

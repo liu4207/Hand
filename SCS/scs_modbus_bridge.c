@@ -169,87 +169,148 @@ void SCS_Bridge_OnWrite(uint16_t startAddr, uint16_t len)
     if (t5) SCS_ExecWritePosN(MB_SERVO_ID5,MB_GOAL_POS5,MB_GOAL_TIME,MB_GOAL_SPEED);
     if (t6) SCS_ExecWritePosN(MB_SERVO_ID6,MB_GOAL_POS6,MB_GOAL_TIME,MB_GOAL_SPEED);
     if (t7) SCS_ExecWritePosN(MB_SERVO_ID7,MB_GOAL_POS7,MB_GOAL_TIME,MB_GOAL_SPEED);
+
+
+// 在 SCS_Bridge_OnWrite() 末尾加：
+		if (startAddr <= MB_SCS_APPLY && (startAddr + len) > MB_SCS_APPLY)
+{
+    if (MODBUS_Reg[MB_SCS_APPLY] == 1)
+    {
+        uint16_t mask = MODBUS_Reg[MB_SCS_MASK];
+        if (mask == 0) mask = 0x007F;
+
+        // 共享速度/时间
+//        uint16_t spd = MODBUS_Reg[MB_SCS_GSPD];
+//        uint16_t tim = MODBUS_Reg[MB_SCS_GTIME];
+
+        // 7个舵机一起下发（ID 从 MB_SERVO_ID..MB_SERVO_ID7 取）
+        // 注意：这里直接复用你已有的 SCS_ExecWritePosN()
+        if (mask & (1u<<0)) SCS_ExecWritePosN(MB_SERVO_ID,  MB_SCS_GPOS1, MB_SCS_GTIME, MB_SCS_GSPD);
+        if (mask & (1u<<1)) SCS_ExecWritePosN(MB_SERVO_ID2, MB_SCS_GPOS2, MB_SCS_GTIME, MB_SCS_GSPD);
+        if (mask & (1u<<2)) SCS_ExecWritePosN(MB_SERVO_ID3, MB_SCS_GPOS3, MB_SCS_GTIME, MB_SCS_GSPD);
+        if (mask & (1u<<3)) SCS_ExecWritePosN(MB_SERVO_ID4, MB_SCS_GPOS4, MB_SCS_GTIME, MB_SCS_GSPD);
+        if (mask & (1u<<4)) SCS_ExecWritePosN(MB_SERVO_ID5, MB_SCS_GPOS5, MB_SCS_GTIME, MB_SCS_GSPD);
+        if (mask & (1u<<5)) SCS_ExecWritePosN(MB_SERVO_ID6, MB_SCS_GPOS6, MB_SCS_GTIME, MB_SCS_GSPD);
+        if (mask & (1u<<6)) SCS_ExecWritePosN(MB_SERVO_ID7, MB_SCS_GPOS7, MB_SCS_GTIME, MB_SCS_GSPD);
+
+        // 清掉 APPLY，避免重复触发
+        MODBUS_Reg[MB_SCS_APPLY] = 0;
+    }
+}
 }
 
-//每隔20ms主循环跑一次
+////每隔20ms主循环跑一次
 
-void SCS_Bridge_Poll_20ms(void){
+//void SCS_Bridge_Poll_20ms(void){
+//    static uint32_t tick = 0;
+//    if (HAL_GetTick() - tick < 20) return;
+//    tick = HAL_GetTick();
+
+//	   // 读取第一个舵机
+//    uint8_t id = sid();
+//    int v;
+
+//      // 位置步数——回写
+//    v = ReadPos(id);
+//    if (v >= 0){
+//        MODBUS_Reg[MB_PRESENT_POS] = (uint16_t)v;
+
+//         // 步数 -> 角度():deg = round(steps * 270 / 1024)
+//        uint16_t steps = (uint16_t)v;
+//        uint32_t t = (uint32_t)steps * 270u + 512u; // +512 实现 /1024 四舍五入
+//        uint16_t deg = (uint16_t)(t >> 10);         // 除以1024
+//        if (deg > 270) deg = 270;
+//        MODBUS_Reg[MB_PRESENT_ANGLE_DEG] = deg;     // 0x010C
+//    }
+//		
+//		  // 读取第二个舵机
+//    uint8_t id2 = 2;  // 第二个舵机的 ID
+//    v = ReadPos(id2);
+//    if (v >= 0) {
+//        MODBUS_Reg[MB_PRESENT_POS2] = (uint16_t)v;
+
+//        // 步数 -> 角度
+//        uint16_t steps = (uint16_t)v;
+//        uint32_t t = (uint32_t)steps * 270u + 512u;
+//        uint16_t deg = (uint16_t)(t >> 10);  
+//        if (deg > 270) deg = 270;
+//        MODBUS_Reg[MB_PRESENT_ANGLE_DEG2] = deg;  // 更新第二个舵机的角度
+//    }
+//		
+//		
+//	    // [LOOP PATCH] 循环状态A <-> B
+//    if (MODBUS_Reg[MB_LOOP_ENABLE]){
+//        uint16_t dwell = MODBUS_Reg[MB_LOOP_DWELL_MS];
+//        if (dwell == 0) dwell = 300;   // ?? 300ms ??
+//        uint16_t spd = MODBUS_Reg[MB_LOOP_SPEED] ? MODBUS_Reg[MB_LOOP_SPEED] : MODBUS_Reg[MB_GOAL_SPEED];
+//        uint16_t tim = MODBUS_Reg[MB_LOOP_TIME]  ? MODBUS_Reg[MB_LOOP_TIME]  : MODBUS_Reg[MB_GOAL_TIME];
+//        uint16_t a   = MODBUS_Reg[MB_LOOP_ANGLE_A];
+//        uint16_t b   = MODBUS_Reg[MB_LOOP_ANGLE_B];
+
+//        if (s_loop.phase == 0){
+//              // 未启动：按当前配置立刻启动
+//            SCS_LoopStartNow();
+//        } else if (s_loop.phase == 1){
+//           // 运动中：到位判断
+//            uint16_t cur = MODBUS_Reg[MB_PRESENT_ANGLE_DEG];
+//            uint16_t tgt = s_loop.tgt_deg;
+//            uint16_t diff = (cur > tgt) ? (cur - tgt) : (tgt - cur);
+//            if (diff <= LOOP_TOL_DEG){
+//                s_loop.phase = 2;
+//                s_loop.t0 = HAL_GetTick();
+//            }
+//        } else if (s_loop.phase == 2){
+//             // 停留结束，切换目标
+//            if (HAL_GetTick() - s_loop.t0 >= dwell){
+//                s_loop.phase = 1;
+//                if (s_loop.toB){
+//                    s_loop.toB = 0;  SCS_GoAngleDeg(b, spd, tim);
+//                } else {
+//                    s_loop.toB = 1;  SCS_GoAngleDeg(a, spd, tim);
+//                }
+//            }
+//        }
+//    } else {
+//        s_loop.phase = 0;   // 关闭状态机复位
+//    }
+
+
+//    v = ReadSpeed(id);   if (v >= 0) MODBUS_Reg[MB_PRESENT_SPEED] = (uint16_t)v;
+//    v = ReadLoad(id);    if (v >= 0) MODBUS_Reg[MB_PRESENT_LOAD]  = (uint16_t)v;
+//    v = ReadVoltage(id); if (v >= 0) MODBUS_Reg[MB_PRESENT_VOLT]  = (uint16_t)v;
+//    v = ReadTemper(id);  if (v >= 0) MODBUS_Reg[MB_PRESENT_TEMP]  = (uint16_t)v;
+//    v = ReadCurrent(id); if (v >= 0) MODBUS_Reg[MB_PRESENT_CURR]  = (uint16_t)(v & 0xFFFF);
+//}
+
+void SCS_Bridge_Poll_20ms(void)
+{
     static uint32_t tick = 0;
     if (HAL_GetTick() - tick < 20) return;
     tick = HAL_GetTick();
 
-	   // 读取第一个舵机
-    uint8_t id = sid();
-    int v;
+    static uint8_t rr = 0;
 
-      // 位置步数——回写
-    v = ReadPos(id);
-    if (v >= 0){
-        MODBUS_Reg[MB_PRESENT_POS] = (uint16_t)v;
+    static const uint16_t k_id_regs[7] = {
+        MB_SERVO_ID, MB_SERVO_ID2, MB_SERVO_ID3, MB_SERVO_ID4,
+        MB_SERVO_ID5, MB_SERVO_ID6, MB_SERVO_ID7
+    };
 
-         // 步数 -> 角度():deg = round(steps * 270 / 1024)
-        uint16_t steps = (uint16_t)v;
-        uint32_t t = (uint32_t)steps * 270u + 512u; // +512 实现 /1024 四舍五入
-        uint16_t deg = (uint16_t)(t >> 10);         // 除以1024
-        if (deg > 270) deg = 270;
-        MODBUS_Reg[MB_PRESENT_ANGLE_DEG] = deg;     // 0x010C
-    }
-		
-		  // 读取第二个舵机
-    uint8_t id2 = 2;  // 第二个舵机的 ID
-    v = ReadPos(id2);
-    if (v >= 0) {
-        MODBUS_Reg[MB_PRESENT_POS2] = (uint16_t)v;
+    uint8_t id = (uint8_t)MODBUS_Reg[k_id_regs[rr]];
+    if (id == 0) id = (uint8_t)(rr + 1);
 
-        // 步数 -> 角度
+    int v = ReadPos(id);
+
+    // 关键：过滤异常值，避免 0xFFFF/超范围被钳位成 270°
+    if (v >= 0 && v <= 1024) {
+		MODBUS_Reg[MB_FB_SCS_STEPS1 + rr] = (uint16_t)v;
         uint16_t steps = (uint16_t)v;
         uint32_t t = (uint32_t)steps * 270u + 512u;
-        uint16_t deg = (uint16_t)(t >> 10);  
+//        uint16_t deg = (uint16_t)(t >> 10);
+		uint16_t deg = (uint16_t)(((uint32_t)steps * 270u) >> 10);
+
         if (deg > 270) deg = 270;
-        MODBUS_Reg[MB_PRESENT_ANGLE_DEG2] = deg;  // 更新第二个舵机的角度
-    }
-		
-		
-	    // [LOOP PATCH] 循环状态A <-> B
-    if (MODBUS_Reg[MB_LOOP_ENABLE]){
-        uint16_t dwell = MODBUS_Reg[MB_LOOP_DWELL_MS];
-        if (dwell == 0) dwell = 300;   // ?? 300ms ??
-        uint16_t spd = MODBUS_Reg[MB_LOOP_SPEED] ? MODBUS_Reg[MB_LOOP_SPEED] : MODBUS_Reg[MB_GOAL_SPEED];
-        uint16_t tim = MODBUS_Reg[MB_LOOP_TIME]  ? MODBUS_Reg[MB_LOOP_TIME]  : MODBUS_Reg[MB_GOAL_TIME];
-        uint16_t a   = MODBUS_Reg[MB_LOOP_ANGLE_A];
-        uint16_t b   = MODBUS_Reg[MB_LOOP_ANGLE_B];
-
-        if (s_loop.phase == 0){
-              // 未启动：按当前配置立刻启动
-            SCS_LoopStartNow();
-        } else if (s_loop.phase == 1){
-           // 运动中：到位判断
-            uint16_t cur = MODBUS_Reg[MB_PRESENT_ANGLE_DEG];
-            uint16_t tgt = s_loop.tgt_deg;
-            uint16_t diff = (cur > tgt) ? (cur - tgt) : (tgt - cur);
-            if (diff <= LOOP_TOL_DEG){
-                s_loop.phase = 2;
-                s_loop.t0 = HAL_GetTick();
-            }
-        } else if (s_loop.phase == 2){
-             // 停留结束，切换目标
-            if (HAL_GetTick() - s_loop.t0 >= dwell){
-                s_loop.phase = 1;
-                if (s_loop.toB){
-                    s_loop.toB = 0;  SCS_GoAngleDeg(b, spd, tim);
-                } else {
-                    s_loop.toB = 1;  SCS_GoAngleDeg(a, spd, tim);
-                }
-            }
-        }
-    } else {
-        s_loop.phase = 0;   // 关闭状态机复位
+        MODBUS_Reg[MB_FB_SCS_ANG1 + rr] = deg;
     }
 
-
-    v = ReadSpeed(id);   if (v >= 0) MODBUS_Reg[MB_PRESENT_SPEED] = (uint16_t)v;
-    v = ReadLoad(id);    if (v >= 0) MODBUS_Reg[MB_PRESENT_LOAD]  = (uint16_t)v;
-    v = ReadVoltage(id); if (v >= 0) MODBUS_Reg[MB_PRESENT_VOLT]  = (uint16_t)v;
-    v = ReadTemper(id);  if (v >= 0) MODBUS_Reg[MB_PRESENT_TEMP]  = (uint16_t)v;
-    v = ReadCurrent(id); if (v >= 0) MODBUS_Reg[MB_PRESENT_CURR]  = (uint16_t)(v & 0xFFFF);
+    rr = (rr + 1) % 7;
 }

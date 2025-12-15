@@ -9,7 +9,7 @@
 /* ---------------- Modbus 地址映射（可按需扩展） ---------------- */
 /* 写寄存器 */
 #define MB_ADDR_LAS_CMD           0x0000  /* 单控指令值（直接写入 0x04/0x23/0x14/0x20/0x22/0x1E 等） */
-#define MB_ADDR_LAS_GOAL_POS      0x0001  /* 目标位置 0~2000 */
+#define MB_ADDR_LAS_GOAL_POS      0x0001  /* 目标位置 0~2000 */ //目前是0x0001 0x0101 0x0201 0x0301
 
 /* 读寄存器（状态） */
 #define MB_ADDR_LAS_CUR_POS       0x0002  /* 当前位置（有符号 16） */
@@ -138,4 +138,5 @@ void LASM_OnWriteSingle(uint16_t mb_addr, uint16_t value);
 void LASM_OnWriteBlock(uint16_t mb_addr_start, const uint16_t* data, uint16_t len);
 void LASM_OnReadMaybeRefresh(uint16_t mb_addr_start, uint16_t qty);
 
+void LASM_Poll_50ms(void);
 #endif /* LAS10_MULTI_H */

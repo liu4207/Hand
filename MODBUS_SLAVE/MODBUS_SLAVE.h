@@ -4,22 +4,6 @@
 #include "main.h"
 #include "gpio.h"
 #include "my_system.h"
-//LED控制
-typedef enum
-{
-  LED1 = (uint8_t)0x01,
-  LED2 = (uint8_t)0x02,
-}LED_NUM;
-
-
-typedef struct
-{
-  void (*LED_ON)(uint8_t);
-  void (*LED_OFF)(uint8_t);
-  void (*LED_TOGGLE)(uint8_t);
-}LED_t;
-
-extern LED_t led;
 
 //中断控制
 #define uart_len 100
@@ -49,11 +33,14 @@ void RS485_Send_Byte(uint8_t Byte);
 void RS485_Send_Array(uint8_t* array,uint16_t len);
 
 //MODBUS RTU
-#define MODBUS_ADDR_LED1   0x0100
-#define MODBUS_ADDR_LED2   0x0101
+#define MODBUS_ADDR_LED1   0x0500
+#define MODBUS_ADDR_LED2   0x0501
+// ========== 寄存器池容量（务必覆盖到 >= 0x0800+你的最大偏移）==========
+// 0x1000 = 4096 regs -> 8KB，STM32H7完全够用
+#define MODBUS_REG_SIZE    0x1000
 
-
-#define MB_SERVO_BASE        0x0100
+// ========== SCS 单体寄存器区（搬家，避免和电缸block冲突）==========
+#define MB_SERVO_BASE      0x0800
 //#define MB_SERVO_ID          (MB_SERVO_BASE + 0)   // 0x0100:舵机id
 //#define MB_GOAL_POS          (MB_SERVO_BASE + 1)   // 0x0101:目标位置
 #define MB_GOAL_SPEED        (MB_SERVO_BASE + 2)   // 0x0102:目标速度
@@ -104,8 +91,8 @@ void RS485_Send_Array(uint8_t* array,uint16_t len);
 #define MB_LOOP_SPEED2       (MB_SERVO_BASE + 69)  // 0x0145:舵机2 循环速度
 #define MB_LOOP_TIME2        (MB_SERVO_BASE + 70)  // 0x0146:舵机2 循环时间（与速度二选一）
 
-//#define MB_GOAL_POS    (MB_SERVO_BASE + 81)  // 0x0151: 目标位置（ID1）
-//#define MB_GOAL_POS2   (MB_SERVO_BASE + 82)  // 0x0152: 舵机 2 目标位置
+//#define MB_GOAL_POS    0x0302   // 0x0151: 目标位置（ID1）
+//#define MB_GOAL_POS2   0x0302  // 0x0152: 舵机 2 目标位置
 //#define MB_GOAL_POS3   (MB_SERVO_BASE + 83)  // 0x0153: 舵机 3 目标位置
 //#define MB_GOAL_POS4   (MB_SERVO_BASE + 84)  // 0x0154: 舵机 4 目标位置
 //#define MB_GOAL_POS5   (MB_SERVO_BASE + 85)  // 0x0155: 舵机 5 目标位置
@@ -153,9 +140,43 @@ void RS485_Send_Array(uint8_t* array,uint16_t len);
 /* ===== 多电缸块大小（一个电缸占用 0x0100 个地址） ===== */
 #define LAS_MB_BLOCK_SIZE      0x0100   /* #1:0x0000~0x00FF, #2:0x0100~0x01FF, ... */
 
-/* 总寄存器容量：4 块 + 预留 16 个作扩展/Group */
-#define MODBUS_REG_SIZE     (4 * LAS_MB_BLOCK_SIZE + 0x25)
 
+//实际要用的
+
+/* ---- Group 操作寄存器（全局段；不与四个块冲突）---- */
+#define MB_GRP_MASK   0x0400  /* 选择哪些电缸：bit0=#1, bit1=#2, bit2=#3, bit3=#4（1=选中） */
+#define MB_GRP_CMD    0x0401  /* 写单控指令：0x04工作/0x23急停/0x14暂停/0x1E清故障/0x22查询... */
+#define MB_GRP_GOAL   0x0402  /* 写目标位置（0~2000）：对选中电缸一起下发 */
+
+/* ---- LAS10Group 多目标（一次写四个）+ 提交 ---- */
+#define MB_GRP_MPOS1  0x0410  /* #1 目标位（0~2000） */
+#define MB_GRP_MPOS2  0x0411  /* #2 目标位 */
+#define MB_GRP_MPOS3  0x0412  /* #3 目标位 */
+#define MB_GRP_MPOS4  0x0413  /* #4 目标位 */
+#define MB_GRP_APPLY  0x0414  /* 写 1 触发：把 0410~0413 扇出到 #1~#4 */
+
+// ========== SCS Group（新增：紧接 LAS Group，便于一条0x10覆盖）==========
+#define MB_SCS_MASK        0x0415
+
+#define MB_SCS_GPOS1       0x0416
+#define MB_SCS_GPOS2       0x0417
+#define MB_SCS_GPOS3       0x0418
+#define MB_SCS_GPOS4       0x0419
+#define MB_SCS_GPOS5       0x041A
+#define MB_SCS_GPOS6       0x041B
+#define MB_SCS_GPOS7       0x041C
+
+#define MB_SCS_GSPD        0x041D
+#define MB_SCS_GTIME       0x041E
+#define MB_SCS_APPLY       0x041F
+
+// MODBUS_SLAVE.h 新增
+#define MB_FB_BASE      0x0420
+#define MB_FB_LAS_POS1  (MB_FB_BASE + 0) // 0x0420
+
+#define MB_FB_SCS_ANG1  (MB_FB_BASE + 4) // 0x0424
+
+#define MB_FB_SCS_STEPS1  0x0430
 
 typedef enum
 {

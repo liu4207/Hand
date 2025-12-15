@@ -91,10 +91,10 @@ void RS485_Send_Array(uint8_t* array,uint16_t len)
 }
 
 //MODBUS RTU设置....................................................................................................................................................
-#define MODBUS_REG_CAP 0x0200
+#define MODBUS_REG_CAP MODBUS_REG_SIZE
 
 //uint16_t MODBUS_Reg[MODBUS_REG_CAP] = {0};
-uint16_t MODBUS_Reg[MODBUS_REG_SIZE];
+uint16_t MODBUS_Reg[2*MODBUS_REG_SIZE] ;
 
 void MODBUS_Init(void)
 {
@@ -112,6 +112,7 @@ void MODBUS_Init(void)
     MODBUS_Reg[MB_GOAL_SPEED] = 1500;
 	MODBUS_Reg[MB_GOAL_SPEED2] = 1500;
 
+	
   MODBUS_Reg[MB_GOAL_TIME]  = 0;
 	MODBUS_Reg[MB_GOAL_TIME2]  = 0;
 	
@@ -270,7 +271,7 @@ void MODBUS_FUNCTION_10(void)
 	//新代码 电缸
   LASM_OnWriteBlock(ADDR_STAR, &MODBUS_Reg[ADDR_STAR], ADDR_LEN); // ← 新
   
-   SCS_Bridge_OnWrite(ADDR_STAR, ADDR_LEN);
+  SCS_Bridge_OnWrite(ADDR_STAR, ADDR_LEN);
   
   modbus.send_buf[i++] = modbus.myaddr; //01
   modbus.send_buf[i++] = 0x10;    
